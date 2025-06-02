@@ -20,7 +20,7 @@ def together_setup():
     with open("dev_cat.csv", "w") as file:
         file.write("categories for df\n")
     for post, claim in df_post_claims.values:
-
+        category_found = False
         response = client.chat.completions.create(
             model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
             messages=[{"role": "user", 
@@ -32,12 +32,12 @@ def together_setup():
         last_line = raw_output.splitlines()[-1].strip()
         for category in categories:
             if category in last_line:
-                print(category)
+                category_found=True
                 with open("dev_cat.csv", "a") as file:
                     file.write(f"{category}\n")
-                break
-            else:
-                print("not", category)
+        if category_found == False:
+            with open("dev_cat.csv", "a") as file:
+                file.write("NONE")
 
 def main():
     env_vars()
