@@ -14,7 +14,7 @@ def batched_df(df, batch_size):
 def summarize_no_context():
     load_dotenv('bart.env')
     write_file = os.getenv('WRITE_TO_FILE')
-    for example in batched_df(dataset, 8):
+    for example in batched_df(dataset, 4):
         prompt = [f"Summarize this text: {row['post']}" for _, row in example.iterrows()]
         print(prompt)       
         summaries = summarizer(prompt)
