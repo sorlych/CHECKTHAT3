@@ -18,6 +18,7 @@ def summarize_no_context():
         prompt = [f"Summarize this text: {row['post']}" for _, row in example.iterrows()]       
         summaries = summarizer(prompt)
         for summary in summaries:
+            print(summary)
             with open(write_file, 'a') as file:
                 file.write(summary)          
 # def summarize_context():
