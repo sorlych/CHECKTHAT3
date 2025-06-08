@@ -7,7 +7,7 @@ import pandas as pd
 summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 prompt = "Please give a summary of this article"
 
-dataset = load_dataset("csv", data_files="dev.csv", split="test", streaming=True)
+dataset = load_dataset("csv", data_files="dev.csv", streaming=True)
 def batched_df(df, batch_size):
     for start in range(0, len(df), batch_size):
         yield df.iloc[start:start + batch_size]
