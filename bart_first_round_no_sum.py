@@ -4,7 +4,7 @@ from itertools import islice
 from dotenv import load_dotenv
 import os
 import pandas as pd
-summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn", truncation=True)
 prompt = "Please give a summary of this article"
 dataset = pd.read_csv("dev.csv")
 # dataset = load_dataset("csv", data_files="dev.csv", streaming=True)
@@ -20,7 +20,7 @@ def summarize_no_context():
         summaries = summarizer(prompt)
         for summary in summaries:
             with open(write_file, 'a') as file:
-                file.write(summary["summary_text"])          
+                file.write(summary["summary_text"] + "\n")          
 # def summarize_context():
 #     load_dotenv('bart.env')
 #     write_file = os.getenv('WRITE_TO_FILE')
