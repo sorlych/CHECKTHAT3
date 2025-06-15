@@ -18,7 +18,7 @@ def summarize_no_context():
     for example in batched_df(dataset, 4):
         prompt = [f"Summarize this text: {row['post']}" for _, row in example.iterrows()]
         print(prompt)       
-        summaries = summarizer(prompt)
+        summaries = summarizer(prompt, truncation=True)
         for summary in summaries:
             with open(write_file, 'a') as file:
                 file.write(summary["summary_text"] + "\n")          
