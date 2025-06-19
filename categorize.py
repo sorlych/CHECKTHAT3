@@ -27,7 +27,7 @@ def together_setup():
                     "content": f"Classify the following post into ONE of these categories: healthcare article, social media post, news article.\n\nRespond with ONLY the category name.\n\nPost: {post}"}]
         )
         raw_output = response.choices[0].message.content
-        print(raw_output)
+        # print(raw_output)
         # print(raw_output.strip().lower())
         last_line = raw_output.splitlines()[-1].strip()
         for category in categories:
