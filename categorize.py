@@ -17,9 +17,9 @@ def together_setup():
     data_set_file = os.getenv("DATASET")
     df_post_claims = pd.read_csv(data_set_file)
     categories = ["healthcare article", "social media post", "news article"]
-    with open("dev_cat.csv", "w") as file:
+    with open("test_cat.csv", "w") as file:
         file.write("categories for df\n")
-    for post, claim in df_post_claims.values:
+    for post in df_post_claims.values:
         category_found = False
         response = client.chat.completions.create(
             model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
@@ -33,10 +33,10 @@ def together_setup():
         for category in categories:
             if category in last_line:
                 category_found=True
-                with open("dev_cat.csv", "a") as file:
+                with open("test_cat.csv", "a") as file:
                     file.write(f"{category}\n")
         if category_found == False:
-            with open("dev_cat.csv", "a") as file:
+            with open("test_cat.csv", "a") as file:
                 file.write("NONE")
 
 def main():
