@@ -1,0 +1,3 @@
+python3 google_pegasus_no_category.py
+python3 t5_no_category.py
+python3 falconsai_no_category.py
