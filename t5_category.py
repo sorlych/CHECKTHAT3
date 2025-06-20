@@ -4,9 +4,9 @@ from itertools import islice
 from dotenv import load_dotenv
 import os
 import pandas as pd
-summarizer = pipeline("summarization", model="google/pegasus-cnn_dailymail", device=0, use_fast=False, tokenizer="google/pegasus-cnn_dailymail")
+summarizer = pipeline("summarization", model="t5-large", device=0, tokenizer="t5-large", use_fast=False)
 # prompt = "Please give a summary of this article"
-dataset = pd.read_csv("test.csv")
+dataset = pd.read_csv("test_with_categories.csv")
 """ batched_df takes in a pandas dataframe and yeilds a dataa frame based on batch size"""
 def batched_df(df, batch_size):
     for start in range(0, len(df), batch_size):
@@ -17,7 +17,7 @@ def summarize_no_context():
     sunmmary_lst = []
     write_file = os.getenv('WRITE_TO_FILE')
     for example in batched_df(dataset, 4):
-        prompt = [f"Summarize: {row['post']}" for _, row in example.iterrows()]
+        prompt = [f"Summarize: This text is categorized as {row['category for df']}. {row['post']}" for _, row in example.iterrows()]
         print(prompt)       
         summaries = summarizer(prompt, truncation=True)
         for summary in summaries:
@@ -25,7 +25,7 @@ def summarize_no_context():
             with open(write_file, 'a') as file:
                 file.write(summary["summary_text"] + "\n")          
     summary_df = pd.DataFrame(sunmmary_lst)
-    summary_df.to_csv("google_summaires.csv", index=False)
+    summary_df.to_csv("t5_summaries_cat.csv", index=False)
 
 def main():
     summarize_no_context()

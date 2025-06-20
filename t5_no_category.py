@@ -4,7 +4,7 @@ from itertools import islice
 from dotenv import load_dotenv
 import os
 import pandas as pd
-summarizer = pipeline("summarization", model="google/pegasus-cnn_dailymail", device=0, use_fast=False, tokenizer="google/pegasus-cnn_dailymail")
+summarizer = pipeline("summarization", model="t5-large", device=0, tokenizer="t5-large", use_fast=False)
 # prompt = "Please give a summary of this article"
 dataset = pd.read_csv("test.csv")
 """ batched_df takes in a pandas dataframe and yeilds a dataa frame based on batch size"""
@@ -25,7 +25,7 @@ def summarize_no_context():
             with open(write_file, 'a') as file:
                 file.write(summary["summary_text"] + "\n")          
     summary_df = pd.DataFrame(sunmmary_lst)
-    summary_df.to_csv("google_summaires.csv", index=False)
+    summary_df.to_csv("t5_summaires.csv", index=False)
 
 def main():
     summarize_no_context()
