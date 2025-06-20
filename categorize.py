@@ -9,7 +9,10 @@ import re
 from dotenv import load_dotenv
 def env_vars():
     load_dotenv("categorize.env")
-
+def shorten_post(post, max_chars=4000):
+    if isinstance(post, str) and len(post) > max_chars:
+        return post[:max_chars] + "..."
+    return post
 def together_setup():
     env_vars()
     api_key = os.getenv("API_KEY")
@@ -21,10 +24,11 @@ def together_setup():
         file.write("categories for df\n")
     for post in df_post_claims.values:
         category_found = False
+        shortened_post = shorten_post(post)
         response = client.chat.completions.create(
             model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
             messages=[{"role": "user", 
-                    "content": f"Classify the following post into ONE of these categories: healthcare article, social media post, news article.\n\nRespond with ONLY the category name.\n\nPost: {post}"}]
+                    "content": f"Classify the following post into ONE of these categories: healthcare article, social media post, news article.\n\nRespond with ONLY the category name.\n\nPost: {shortened_post}"}]
         )
         raw_output = response.choices[0].message.content
         # print(raw_output)
