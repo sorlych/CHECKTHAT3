@@ -3,8 +3,8 @@ from nltk.translate.meteor_score import meteor_score
 import pandas as pd
 import numpy as np
 def calculate_metor():
-    df_dataset = pd.read_csv("dev.csv")
-    df_summaries = pd.read_csv("out_summaries_trimmed.csv")
+    df_dataset = pd.read_csv("train.csv")
+    df_summaries = pd.read_csv("t5_summaires.csv")
     # df_summaries_context
     df_dataset_summaries = pd.concat([df_dataset, df_summaries], axis=1)
     print(df_dataset_summaries.head())
@@ -18,7 +18,7 @@ def calculate_metor():
             print("not a filled row!")
         else:
             score += meteor_score([word_tokenize(row["normalized claim"])], word_tokenize(row["summary"]))
-    avg = round(score/1171, 5)
+    avg = round(score/1285, 5)
     print(avg)    
 
 
