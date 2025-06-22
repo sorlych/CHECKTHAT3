@@ -6,7 +6,7 @@ import os
 import pandas as pd
 summarizer = pipeline("summarization", model="Falconsai/text_summarization", device=0)
 # prompt = "Please give a summary of this article"
-dataset = pd.read_csv("test_with_categories.csv")
+dataset = pd.read_csv("train_with_categories.csv")
 """ batched_df takes in a pandas dataframe and yeilds a dataa frame based on batch size"""
 def batched_df(df, batch_size):
     for start in range(0, len(df), batch_size):
