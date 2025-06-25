@@ -28,7 +28,8 @@ def together_setup():
         response = client.chat.completions.create(
             model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
             messages=[{"role": "user", 
-                    "content": f"Classify the following post into ONE of these categories: healthcare article, social media post, news article.\n\nRespond with ONLY the category name.\n\nPost: {shortened_post}"}]
+                    "content": f"Classify the following post into ONE of these categories: healthcare article, social media post, news article.\n\nRespond with ONLY the category name.\n\nPost: {shortened_post}"}],
+            max_tokens= 400
         )
         raw_output = response.choices[0].message.content
         # print(raw_output)
