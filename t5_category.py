@@ -17,7 +17,7 @@ def summarize_no_context():
     sunmmary_lst = []
     write_file = os.getenv('WRITE_TO_FILE')
     for example in batched_df(dataset, 4):
-        prompt = [f"Summarize: This text is categorized as {row['category for df']}. {row['post']}" for _, row in example.iterrows()]
+        prompt = [f"Summarize: This text is categorized as {row['categories for df']}. {row['post']}" for _, row in example.iterrows()]
         print(prompt)       
         summaries = summarizer(prompt, truncation=True)
         for summary in summaries:
