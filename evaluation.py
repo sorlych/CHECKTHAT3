@@ -18,7 +18,7 @@ def calculate_metor():
             print("not a filled row!")
         else:
             score += meteor_score([word_tokenize(row["normalized claim"])], word_tokenize(row["summary"]))
-    avg = round(score/1285, 5)
+    avg = round(score/11374, 5)
     print(avg)    
 
 
