@@ -38,10 +38,10 @@ def together_setup():
         for category in categories:
             if category in last_line:
                 category_found=True
-                with open("test_cat.csv", "a") as file:
+                with open("train_cat.csv", "a") as file:
                     file.write(f"{category}\n")
         if category_found == False:
-            with open("test_cat.csv", "a") as file:
+            with open("train_cat.csv", "a") as file:
                 file.write("NONE")
 
 def main():

@@ -1,0 +1,2 @@
+bash run_summarization_no_cat.sh
+bash run_summarization_cat.sh

@@ -24,4 +24,4 @@ for meteor_results in results_lst:
     for _, health in health_meteor.iterrows():
         health_meteor_score+=health['metor']
     avg_meteor_score_for_health = health_meteor_score/len(lst_of_indexs_health)
-    print(f"result {meteor_results}\nhealth: {avg_meteor_score_for_health},\nsocial: {avg_meteor_score_for_social},\nnews: {avg_meteor_score_for_news}\n\n")
+    print(f"result {meteor_results}\nhealth: {round(avg_meteor_score_for_health,4)},\nsocial: {round(avg_meteor_score_for_social,4)},\nnews: {round(avg_meteor_score_for_news,4)}\n\n")
